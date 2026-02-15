@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#1a2812">
+  <title>BCK Studio — Loading</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100%;
+      min-width: 320px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
+      font-family: 'Oswald', sans-serif;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* Фон: слой с фото */
+    .scene {
+      position: absolute;
+      inset: 0;
+      background: #1a2812;
+    }
+
+    /* Основной фон — фото (положите bg.jpg в папку с страницей или укажите свой путь) */
+    .scene-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://i.playground.ru/i/pix/2678709/image.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* Лёгкая затемняющая дымка поверх фото для читаемости текста */
+    .scene::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0.15) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(0, 0, 0, 0.4) 100%
+      );
+      pointer-events: none;
+    }
+
+    /* Контейнер контента поверх сцены */
+    .ui {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      height: 100%;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    /* Логотип в центре: иконка слева от названия */
+    .logo-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(12px, 3vw, 20px);
+      text-align: center;
+      padding: 0 clamp(16px, 5vw, 24px);
+      max-width: 100%;
+    }
+
+    .logo-row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: clamp(12px, 3vw, 20px);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .logo-icon {
+      width: clamp(64px, 20vw, 100px);
+      height: clamp(64px, 20vw, 100px);
+      min-width: 64px;
+      min-height: 64px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+    }
+
+    .logo-title {
+      font-size: clamp(1.35rem, 4vw + 1rem, 3.5rem);
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: clamp(0.05em, 1.5vw, 0.15em);
+      text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.8),
+        0 0 20px rgba(0, 0, 0, 0.5);
+      word-break: keep-all;
+      hyphens: none;
+    }
+
+    /* Предупреждение 18+ внизу слева — без фона */
+    .warning-18 {
+      position: absolute;
+      bottom: max(16px, env(safe-area-inset-bottom));
+      left: max(16px, env(safe-area-inset-left));
+      right: max(16px, env(safe-area-inset-right));
+      max-width: 560px;
+      display: flex;
+      align-items: flex-start;
+      gap: clamp(10px, 2.5vw, 16px);
+      padding: 0;
+    }
+
+    .warning-18 .icon {
+      flex-shrink: 0;
+      width: clamp(36px, 10vw, 48px);
+      height: clamp(36px, 10vw, 48px);
+      min-width: 36px;
+      min-height: 36px;
+      margin-top: 4px;
+      border: clamp(4px, 1.2vw, 6px) solid #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: clamp(22px, 6vw, 32px);
+      font-weight: 800;
+      -webkit-text-stroke: 1px #fff;
+      text-stroke: 10px #fff;
+    }
+
+    .warning-18 .text {
+      color: #fff;
+      font-size: clamp(0.875rem, 2.5vw + 0.5rem, 22px);
+      line-height: 1.35;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-weight: 900;
+      min-width: 0;
+    }
+
+    /* Очень узкие экраны (маленькие смартфоны) */
+    @media (max-width: 359px) {
+      .logo-row {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .logo-title {
+        font-size: 1.25rem;
+        letter-spacing: 0.04em;
+      }
+      .warning-18 {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 8px;
+      }
+      .warning-18 .icon {
+        margin-top: 0;
+      }
+    }
+
+    /* Высокие узкие экраны (портрет) */
+    @media (max-height: 500px) and (orientation: portrait) {
+      .logo-block {
+        gap: 8px;
+      }
+      .logo-icon {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        min-height: 56px;
+        padding: 10px;
+      }
+      .logo-title {
+        font-size: 1.25rem;
+      }
+      .warning-18 {
+        bottom: max(10px, env(safe-area-inset-bottom));
+      }
+      .warning-18 .text {
+        font-size: 0.8125rem;
+      }
+    }
+
+    /* Горизонтальная ориентация на мобильных */
+    @media (max-width: 768px) and (orientation: landscape) {
+      .logo-block {
+        gap: 10px;
+      }
+      .logo-icon {
+        width: 56px;
+        height: 56px;
+        min-width: 56px;
+        min-height: 56px;
+      }
+      .logo-title {
+        font-size: clamp(1.1rem, 3vw + 0.5rem, 1.75rem);
+      }
+      .warning-18 .text {
+        font-size: 0.875rem;
+      }
+    }
+
+    /* Широкие экраны — центрирование предупреждения по горизонтали не меняем, left остаётся */
+    @media (min-width: 1200px) {
+      .logo-title {
+        letter-spacing: 0.15em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="scene">
+    <div class="scene-bg"></div>
+  </div>
+
+  <div class="ui">
+    <div class="logo-block">
+      <div class="logo-row">
+        <div class="logo-icon">
+          <img src="https://images.steamusercontent.com/ugc/2426950071413407281/CA2A34F1AB69F5D87C7EC7828AEAB828AB84F978/?imw=512&amp;imh=512&amp;ima=fit&amp;impolicy=Letterbox&amp;imcolor=%23000000&amp;letterbox=true" alt="BCK Studio" width="100" height="100" loading="eager">
+        </div>
+        <h1 class="logo-title">BCK-Studio</h1>
+      </div>
+    </div>
+
+    <div class="warning-18">
+      <span class="icon">!</span>
+      <span class="text">This server contains 18+ content. If you are under 18, please leave the server!</span>
+    </div>
+  </div>
+</body>
+</html>
