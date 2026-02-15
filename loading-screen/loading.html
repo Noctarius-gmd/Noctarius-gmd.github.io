@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#1a2812">
-  <title>BCK Studio — Loading</title>
+  <meta name="theme-color" content="#0d0d0d">
+  <title>BCK Studio — Loading | Garry's Mod</title>
   <style>
     * {
       margin: 0;
@@ -22,11 +22,11 @@
       -webkit-text-size-adjust: 100%;
     }
 
-    /* Фон: слой с фото */
+    /* Фон — GMod стиль: тёмный */
     .scene {
       position: absolute;
       inset: 0;
-      background: #1a2812;
+      background: #0d0d0d;
     }
 
     /* Основной фон — фото bg.jpg в папке рядом с loading.html */
@@ -39,18 +39,14 @@
       background-repeat: no-repeat;
     }
 
-    /* Лёгкая затемняющая дымка поверх фото для читаемости текста */
+    /* Затемнение + виньетка в стиле Source/GMod */
     .scene::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(0, 0, 0, 0.15) 0%,
-        transparent 40%,
-        transparent 60%,
-        rgba(0, 0, 0, 0.4) 100%
-      );
+      background:
+        radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.5) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.35) 0%, transparent 35%, transparent 65%, rgba(0,0,0,0.7) 100%);
       pointer-events: none;
     }
 
@@ -112,13 +108,13 @@
       text-transform: uppercase;
       letter-spacing: clamp(0.05em, 1.5vw, 0.15em);
       text-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.8),
+        0 2px 4px rgba(0, 0, 0, 0.9),
         0 0 20px rgba(0, 0, 0, 0.5);
       word-break: keep-all;
       hyphens: none;
     }
 
-    /* Предупреждение 18+ внизу слева — без фона */
+    /* Предупреждение 18+ внизу слева */
     .warning-18 {
       position: absolute;
       bottom: max(16px, env(safe-area-inset-bottom));
@@ -138,7 +134,7 @@
       min-width: 36px;
       min-height: 36px;
       margin-top: 4px;
-      border: clamp(4px, 1.2vw, 6px) solid #fff;
+      border: clamp(4px, 1.2vw, 6px) solid #e4e4e4;
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -245,10 +241,13 @@
       </div>
     </div>
 
+    </div>
+
     <div class="warning-18">
       <span class="icon">!</span>
       <span class="text">This server contains 18+ content. If you are under 18, please leave the server!</span>
     </div>
   </div>
+
 </body>
 </html>
